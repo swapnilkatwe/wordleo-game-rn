@@ -2,17 +2,24 @@ import { StatusBar } from "expo-status-bar";
 import { StyleSheet, View } from "react-native";
 import Keyboard from "./components/Keyboard";
 import GridRow from "./components/GridRow";
+import Header from "./components/Header";
 
 export default function App() {
+  let rows = Array(5).fill({ guess: "APPLE", result: [] });
+
   const keyboardHandler = (letter: string) => {
     console.log(letter);
   };
 
-  let rows = Array(5).fill({ guess: "APPLE", result: [] });
+  const handleOnOpenModal = () => {
+    console.log("Clicked");
+  };
   return (
     <View style={styles.container}>
       <StatusBar style="auto" />
 
+      {/* render Header */}
+      <Header handleOnOpenModal={handleOnOpenModal} />
       {/* Render Grid */}
       {rows.map(({ guess, result }, index) => (
         <GridRow key={index} word={guess} result={result} animateRowCss={""} />
