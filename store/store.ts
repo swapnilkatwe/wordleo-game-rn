@@ -1,6 +1,7 @@
 import { create } from "zustand";
 import { compareGuess, getRandomWord, letterStatus } from "../utils/utils";
 import { persist, createJSONStorage } from "zustand/middleware";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 export const WORD_LENGTH = 5;
 
@@ -70,8 +71,8 @@ export const useWordleoStore = create<StoreState>()(
       };
     },
     {
-      name: "wordleStorage",
-      storage: createJSONStorage(() => localStorage),
+      name: "wordleoStorage",
+      storage: createJSONStorage(() => AsyncStorage), // AsyncStorage for React Native
     }
   )
 );
