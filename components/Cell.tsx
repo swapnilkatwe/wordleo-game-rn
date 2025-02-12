@@ -27,7 +27,6 @@ const Cell = ({ character, state }: Props) => {
 const styles = StyleSheet.create({
   cell: {
     borderWidth: 1,
-    padding: 8,
     height: 48,
     width: 48,
     margin: 8,

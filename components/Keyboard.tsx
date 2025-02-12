@@ -1,7 +1,8 @@
-import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
+import { View, Text, TouchableOpacity, StyleSheet, Image } from "react-native";
 import { letterStatus } from "../utils/utils";
 import { useWordleoStore } from "../store/store";
 import { characterStateStyle } from "../utils/styles";
+import Backspace from "../assets/backspace.svg";
 
 const keyboardKeys = [
   ["Q", "W", "E", "R", "T", "Y", "U", "I", "O", "P"],
@@ -53,7 +54,21 @@ const Keyboard = ({ onClick, isGameOver, isGameWon }: Props) => {
                 style={stylesArray}
                 disabled={isGameOver || isGameWon}
               >
-                <Text style={styles.keyText}>{key}</Text>
+                {key === "Backspace" ? (
+                  <Image
+                    source={require("../assets/Backspace.png")}
+                    style={{ width: 24, height: 24 }}
+                    resizeMode="contain"
+                  />
+                ) : key === "Enter" ? (
+                  <Image
+                    source={require("../assets/Enter-icon.png")}
+                    style={{ width: 24, height: 24 }}
+                    resizeMode="contain"
+                  />
+                ) : (
+                  <Text style={styles.keyText}>{key}</Text>
+                )}
               </TouchableOpacity>
             );
           })}
