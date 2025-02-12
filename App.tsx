@@ -1,5 +1,5 @@
 import { StatusBar } from "expo-status-bar";
-import { Alert, StyleSheet, View } from "react-native";
+import { Alert, Text, StyleSheet, View } from "react-native";
 import Keyboard from "./components/Keyboard";
 import GridRow from "./components/GridRow";
 import Header from "./components/Header";
@@ -69,6 +69,12 @@ export default function App() {
         <GridRow key={index} word={guess} result={result} animateRowCss={""} />
       ))}
 
+      {/* Validate guess */}
+      {!isValidWord && (
+        <Text style={styles.centeredErrorText}>
+          Not a word in saved list. Please try again!
+        </Text>
+      )}
       {/* Render Keyboard */}
       <Keyboard
         onClick={(letter) => {
@@ -97,5 +103,19 @@ const styles = StyleSheet.create({
     backgroundColor: "#fff",
     alignItems: "center",
     justifyContent: "center",
+  },
+  centeredErrorText: {
+    position: "absolute",
+    left: 0,
+    right: 0,
+    top: "50%",
+    marginHorizontal: "auto",
+    textAlign: "center",
+    color: "#be123c", // Tailwind's rose-700
+    fontSize: 20, // Tailwind's text-xl
+    backgroundColor: "#f1f5f9", // Tailwind's slate-100
+    width: "100%",
+    paddingVertical: 8, // Tailwind's py-2
+    borderRadius: 8, // Tailwind's rounded
   },
 });
