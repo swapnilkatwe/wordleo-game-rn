@@ -9,7 +9,7 @@ const Header = ({ handleOnOpenModal }: Props) => {
   return (
     <View style={styles.header}>
       <View style={styles.container}>
-        <Text style={styles.title}>WordleoReplica</Text>
+        <Text style={styles.title}>WordLeonard</Text>
         <TouchableOpacity style={styles.button} onPress={handleOnOpenModal}>
           <Image
             source={require("../assets/QuestionIcon.png")}

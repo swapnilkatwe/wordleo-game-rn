@@ -2,7 +2,6 @@ import { View, Text, TouchableOpacity, StyleSheet, Image } from "react-native";
 import { letterStatus } from "../utils/utils";
 import { useWordleoStore } from "../store/store";
 import { characterStateStyle } from "../utils/styles";
-import Backspace from "../assets/backspace.svg";
 
 const keyboardKeys = [
   ["Q", "W", "E", "R", "T", "Y", "U", "I", "O", "P"],
