@@ -1,11 +1,19 @@
 import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
 import { letterStatus } from "../utils/utils";
+import { useWordleoStore } from "../store/store";
+import { characterStateStyle } from "../utils/styles";
 
 const keyboardKeys = [
   ["Q", "W", "E", "R", "T", "Y", "U", "I", "O", "P"],
   ["A", "S", "D", "F", "G", "H", "J", "K", "L"],
   ["Backspace", "Z", "X", "C", "V", "B", "N", "M", "Enter"],
 ];
+
+const keyStateStyles = {
+  [letterStatus.absent]: characterStateStyle.absent,
+  [letterStatus.present]: characterStateStyle.present,
+  [letterStatus.correct]: characterStateStyle.correct,
+};
 
 type Props = {
   onClick: (letter: string) => void;
@@ -14,8 +22,9 @@ type Props = {
 };
 
 const Keyboard = ({ onClick, isGameOver, isGameWon }: Props) => {
-  const keyBoardLetterState = letterStatus.present;
-
+  const keyBoardLetterState = useWordleoStore(
+    (state) => state.keyboardLetterState
+  );
   const onClickButton = (letter: string) => {
     onClick(letter.toUpperCase());
   };
@@ -27,7 +36,15 @@ const Keyboard = ({ onClick, isGameOver, isGameWon }: Props) => {
           {keyboardRow.map((key, index) => {
             let stylesArray = [styles.key];
 
-            const letterState = letterStatus.absent;
+            const letterState =
+              keyStateStyles[
+                keyBoardLetterState[key] as keyof typeof keyStateStyles
+              ];
+            if (letterState) {
+              stylesArray.push({ ...styles.key, ...letterState });
+            } else if (key !== "") {
+              stylesArray.push({ ...styles.key, ...styles.defaultKey });
+            }
 
             return (
               <TouchableOpacity
@@ -70,15 +87,6 @@ const styles = StyleSheet.create({
   },
   keyText: {
     color: "black",
-  },
-  absent: {
-    backgroundColor: "slategray",
-  },
-  present: {
-    backgroundColor: "yellow",
-  },
-  correct: {
-    backgroundColor: "green",
   },
   defaultKey: {
     backgroundColor: "lightgray",

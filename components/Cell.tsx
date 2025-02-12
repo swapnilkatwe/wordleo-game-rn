@@ -1,37 +1,17 @@
 import React from "react";
 import { TextInput, StyleSheet, View } from "react-native";
 import { letterStatus } from "../utils/utils";
+import { characterStateStyle } from "../utils/styles";
 
 type Props = {
   character: string;
   state: letterStatus;
 };
-const caracterStateStyle = StyleSheet.create({
-  correct: {
-    backgroundColor: "#22c55e",
-    color: "#ffffff",
-    borderColor: "#22c55e",
-  },
-  present: {
-    backgroundColor: "#f59e0b",
-    color: "#ffffff",
-    borderColor: "#f59e0b",
-  },
-  absent: {
-    backgroundColor: "#94a3b8",
-    color: "#ffffff",
-    borderColor: "#94a3b8",
-  },
-  default: {
-    backgroundColor: "#ffffff",
-    borderColor: "#cbd5e1",
-  },
-});
 
 const Cell = ({ character, state }: Props) => {
   const stateStyles = state
-    ? caracterStateStyle[state]
-    : caracterStateStyle.default;
+    ? characterStateStyle[state]
+    : characterStateStyle.default;
   return (
     <View style={[styles.cell, stateStyles]}>
       <TextInput
